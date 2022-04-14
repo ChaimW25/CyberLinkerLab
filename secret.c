@@ -9,7 +9,7 @@
         printf("Please enter password\n");
         char password[1000];
         scanf("%s\n", password);
-        printf("%s",password);
-//	printf("Doing super secret stuff\n");
-//        while (password==NULL);
+	    printf("Doing super secret stuff\n");
+
+        while (1);
     }

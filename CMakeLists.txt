@@ -3,4 +3,4 @@ project(Linker C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(Linker secret.c server.c)
+add_executable(Linker secret.c server.c scanfAttack.c)
